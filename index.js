@@ -16,3 +16,29 @@ let bookCollection = JSON.parse(localStorage.getItem('bookCollection')) || { boo
         bookList.appendChild(bookElement);
       });
     }
+
+    // Add a new book to the collection
+    function addBook() {
+      const titleInput = document.getElementById('title');
+      const authorInput = document.getElementById('author');
+      const title = titleInput.value.trim();
+      const author = authorInput.value.trim();
+
+      if (title && author) {
+        const newBook = {
+          title: title,
+          author: author
+        };
+
+        bookCollection.books.push(newBook);
+
+        // Save updated collection to localStorage
+        localStorage.setItem('bookCollection', JSON.stringify(bookCollection));
+
+        // Clear input fields
+        titleInput.value = '';
+        authorInput.value = '';
+
+        displayBooks();
+      }
+    }
