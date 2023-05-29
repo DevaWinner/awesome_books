@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+
 const bookCollection = JSON.parse(localStorage.getItem('bookCollection')) || { books: [] };
 
 // Display books in the collection
