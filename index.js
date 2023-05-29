@@ -42,3 +42,15 @@ let bookCollection = JSON.parse(localStorage.getItem('bookCollection')) || { boo
         displayBooks();
       }
     }
+
+    // Remove a book from the collection
+    function removeBook(index) {
+      bookCollection.books.splice(index, 1);
+
+      // Save updated collection to localStorage
+      localStorage.setItem('bookCollection', JSON.stringify(bookCollection));
+
+      displayBooks();
+    }
+
+    displayBooks();
