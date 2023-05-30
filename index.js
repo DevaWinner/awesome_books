@@ -11,9 +11,14 @@ function displayBooks() {
     const bookElement = document.createElement('div');
     bookElement.classList.add('book');
     bookElement.innerHTML = `
-          <span>${book.title}</span>
-          <span>${book.author}</span>
-          <button onclick="removeBook(${index})">Remove</button>
+        <div class="book-info">
+          <span>"${book.title}"</span>
+          <span> by ${book.author}</span>
+        </div>
+          <div class="btn-container">
+            <button onclick="removeBook(${index})">Remove</button>
+          </div>
+          
         `;
     bookList.appendChild(bookElement);
   });
