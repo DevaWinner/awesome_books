@@ -1,25 +1,64 @@
 /* eslint-disable no-unused-vars */
+/* eslint-disable max-classes-per-file */
+/* eslint-disable class-methods-use-this */
 
-const bookCollection = JSON.parse(localStorage.getItem('bookCollection')) || { books: [] };
+class Book {
+  constructor(title, author) {
+    this.title = title;
+    this.author = author;
+  }
+}
+
+class BookCollection {
+  constructor() {
+    this.books = this.loadBooksFromLocalStorage();
+  }
+
+  addBook(title, author) {
+    const newBook = new Book(title, author);
+    this.books.push(newBook);
+    this.saveBooksToLocalStorage();
+  }
+
+  removeBook(index) {
+    this.books.splice(index, 1);
+    this.saveBooksToLocalStorage();
+  }
+
+  // Save updated collection to localStorage
+  saveBooksToLocalStorage() {
+    localStorage.setItem('books', JSON.stringify(this.books));
+  }
+
+  loadBooksFromLocalStorage() {
+    const storedBooks = localStorage.getItem('books');
+    return storedBooks ? JSON.parse(storedBooks) : [];
+  }
+
+  getBooks() {
+    return this.books;
+  }
+}
+
+const bookCollection = new BookCollection();
 
 // Display books in the collection
 function displayBooks() {
   const bookList = document.getElementById('bookList');
   bookList.innerHTML = '';
 
-  bookCollection.books.forEach((book, index) => {
+  bookCollection.getBooks().forEach((book, index) => {
     const bookElement = document.createElement('div');
     bookElement.classList.add('book');
     bookElement.innerHTML = `
-        <div class="book-info">
-          <span>"${book.title}"</span>
-          <span> by ${book.author}</span>
-        </div>
-          <div class="btn-container">
-            <button onclick="removeBook(${index})">Remove</button>
-          </div>
-          
-        `;
+      <div class="book-info">
+        <span>"${book.title}"</span>
+        <span> by ${book.author}</span>
+      </div>
+      <div class="btn-container">
+        <button onclick="removeBook(${index})">Remove</button>
+      </div>
+    `;
     bookList.appendChild(bookElement);
   });
 }
@@ -32,31 +71,16 @@ function addBook() {
   const author = authorInput.value.trim();
 
   if (title && author) {
-    const newBook = {
-      title,
-      author,
-    };
-
-    bookCollection.books.push(newBook);
-
-    // Save updated collection to localStorage
-    localStorage.setItem('bookCollection', JSON.stringify(bookCollection));
-
-    // Clear input fields
+    bookCollection.addBook(title, author);
     titleInput.value = '';
     authorInput.value = '';
-
     displayBooks();
   }
 }
 
 // Remove a book from the collection
 function removeBook(index) {
-  bookCollection.books.splice(index, 1);
-
-  // Save updated collection to localStorage
-  localStorage.setItem('bookCollection', JSON.stringify(bookCollection));
-
+  bookCollection.removeBook(index);
   displayBooks();
 }
 
