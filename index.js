@@ -1,7 +1,10 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-classes-per-file */
 /* eslint-disable class-methods-use-this */
-
+let dateShow = document.getElementById('date-show');
+let date = new Date();
+console.log(date)
+dateShow.innerText = `${date}`
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -85,3 +88,30 @@ function removeBook(index) {
 }
 
 displayBooks();
+
+// Control which section to show
+const list = document.getElementById('list');
+const listAdd = document.getElementById('list-add-new');
+const listContact = document.getElementById('list-contact');
+// Three main sections
+const mainSection = document.getElementById('main');
+const addBookSection = document.getElementById('add-new');
+const contactSection = document.getElementById('contact');
+
+list.addEventListener('click', () => {
+  mainSection.style.display = 'block';
+  addBookSection.style.display = 'none';
+  contactSection.style.display = 'none';
+});
+
+listAdd.addEventListener('click', () => {
+  addBookSection.style.display = 'block';
+  mainSection.style.display = 'none';
+  contactSection.style.display = 'none';
+});
+
+listContact.addEventListener('click', () => {
+  contactSection.style.display = 'block';
+  addBookSection.style.display = 'none';
+  mainSection.style.display = 'none';
+});

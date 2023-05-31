@@ -3,6 +3,14 @@
   padding: 0;
 }
 
+header {
+  border: 1px solid black;
+}
+
+header ul li {
+  cursor: pointer;
+}
+
 .heading {
   text-align: center;
   margin: 0.7em;
@@ -84,4 +92,11 @@ button:hover {
   width: 100%;
   display: flex;
   justify-content: flex-end;
+}
+
+.contact-container,
+.copyright-container {
+  width: 70%;
+  margin: 10px auto;
+  border: 1px solid black;
 }
