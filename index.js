@@ -1,10 +1,15 @@
 /* eslint-disable no-unused-vars */
 /* eslint-disable max-classes-per-file */
 /* eslint-disable class-methods-use-this */
-let dateShow = document.getElementById('date-show');
-let date = new Date();
-console.log(date)
-dateShow.innerText = `${date}`
+
+// ============ Date and time ============
+
+const dateShow = document.getElementById('date-show');
+const date = new Date();
+dateShow.innerText = `${date}`;
+
+// ============ Book collection ============
+
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -89,29 +94,32 @@ function removeBook(index) {
 
 displayBooks();
 
+/* ============== Navigation ================= */
+
 // Control which section to show
-const list = document.getElementById('list');
-const listAdd = document.getElementById('list-add-new');
-const listContact = document.getElementById('list-contact');
+const list = document.getElementById('navList');
+const navAdd = document.getElementById('navAddNew');
+const navContact = document.getElementById('navContact');
+
 // Three main sections
-const mainSection = document.getElementById('main');
+const mainSection = document.getElementById('allBooks');
 const addBookSection = document.getElementById('add-new');
 const contactSection = document.getElementById('contact');
 
 list.addEventListener('click', () => {
-  mainSection.style.display = 'block';
-  addBookSection.style.display = 'none';
-  contactSection.style.display = 'none';
+  mainSection.classList.remove('hidden');
+  addBookSection.classList.add('hidden');
+  contactSection.classList.add('hidden');
 });
 
-listAdd.addEventListener('click', () => {
-  addBookSection.style.display = 'block';
-  mainSection.style.display = 'none';
-  contactSection.style.display = 'none';
+navAdd.addEventListener('click', () => {
+  mainSection.classList.add('hidden');
+  addBookSection.classList.remove('hidden');
+  contactSection.classList.add('hidden');
 });
 
-listContact.addEventListener('click', () => {
-  contactSection.style.display = 'block';
-  addBookSection.style.display = 'none';
-  mainSection.style.display = 'none';
+navContact.addEventListener('click', () => {
+  mainSection.classList.add('hidden');
+  addBookSection.classList.add('hidden');
+  contactSection.classList.remove('hidden');
 });
