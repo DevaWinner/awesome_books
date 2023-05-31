@@ -2,6 +2,14 @@
 /* eslint-disable max-classes-per-file */
 /* eslint-disable class-methods-use-this */
 
+// ============ Date and time ============
+
+const dateShow = document.getElementById('date-show');
+const date = new Date();
+dateShow.innerText = `${date}`;
+
+// ============ Book collection ============
+
 class Book {
   constructor(title, author) {
     this.title = title;
@@ -85,3 +93,33 @@ function removeBook(index) {
 }
 
 displayBooks();
+
+/* ============== Navigation ================= */
+
+// Control which section to show
+const list = document.getElementById('navList');
+const navAdd = document.getElementById('navAddNew');
+const navContact = document.getElementById('navContact');
+
+// Three main sections
+const mainSection = document.getElementById('allBooks');
+const addBookSection = document.getElementById('add-new');
+const contactSection = document.getElementById('contact');
+
+list.addEventListener('click', () => {
+  mainSection.classList.remove('hidden');
+  addBookSection.classList.add('hidden');
+  contactSection.classList.add('hidden');
+});
+
+navAdd.addEventListener('click', () => {
+  mainSection.classList.add('hidden');
+  addBookSection.classList.remove('hidden');
+  contactSection.classList.add('hidden');
+});
+
+navContact.addEventListener('click', () => {
+  mainSection.classList.add('hidden');
+  addBookSection.classList.add('hidden');
+  contactSection.classList.remove('hidden');
+});
